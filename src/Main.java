@@ -2,40 +2,46 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int litres;
-        String fuelType;
-        double dieselCostPerLitre = 1.54;
-        double petrolCostPerLitre = 1.37;
-        double totalFuelPrice;
-        boolean isValidFuelType = false;
+        tripCalculation();
+    }
 
+    public static void tripCalculation() {
         Scanner scanner = new Scanner(System.in);
 
+        final double dieselCostPerLitre = 1.54;
+        final double petrolCostPerLitre = 1.37;
 
-        System.out.println("Diesel: £" + dieselCostPerLitre +
-                            " Petrol: £" + petrolCostPerLitre + "\n"); // Displays the price of each fuel type
+        System.out.println("Fuel Prices:");
+        System.out.println("Diesel: £" + dieselCostPerLitre);
+        System.out.println("Petrol: £" + petrolCostPerLitre + "\n");
 
-        while (!isValidFuelType) {
-            System.out.println("Diesel or Petrol");
-            fuelType = scanner.nextLine();
 
-            if (fuelType.equalsIgnoreCase("Diesel") || fuelType.equalsIgnoreCase("Petrol")) {
-                isValidFuelType = true;
+
+        System.out.print("Enter the distance of your trip in miles: ");
+        int distanceInMiles = scanner.nextInt();
+
+        System.out.print("Enter your vehicle's MPG (miles per gallon): ");
+        double mpg = scanner.nextDouble();
+
+        String fuelType = "";
+        while (true) {
+            System.out.print("Does your car use petrol or diesel? (p/d): ");
+            fuelType = scanner.next().toLowerCase();
+
+            if (fuelType.equals("p") || fuelType.equals("d")) {
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter 'p' for petrol or 'd' for diesel.");
             }
-            else
-                System.out.println("Invalid fuel type");
         }
 
+        double gallonsNeeded = distanceInMiles / mpg;
+        double litresNeeded = gallonsNeeded * 3.78541;
 
-        System.out.println("Enter the number of litres you want to insert: ");
+        double fuelPricePerLitre = fuelType.equals("d") ? dieselCostPerLitre : petrolCostPerLitre;
 
-        litres = scanner.nextInt();
+        double tripCost = litresNeeded * fuelPricePerLitre;
 
-        totalFuelPrice = Math.round(litres * petrolCostPerLitre);
-
-        System.out.println("Total Cost: £" + totalFuelPrice);
-
-
-        System.out.println("Fuel Calculator");
+        System.out.printf("Trip cost: £%.2f%n", tripCost);
     }
 }
