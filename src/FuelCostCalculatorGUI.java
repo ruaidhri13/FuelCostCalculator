@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 
 public class FuelCostCalculatorGUI extends Application {
 
-    private final double dieselCostPerLitre = 1.54;
-    private final double petrolCostPerLitre = 1.37;
+    private final double dieselCostPerLitre = 1.34;
+    private final double petrolCostPerLitre = 1.29;
 
     public static void main(String[] args) {
         launch(args);
@@ -53,7 +53,7 @@ public class FuelCostCalculatorGUI extends Application {
                 double fuelPricePerLitre = fuelTypeBox.getValue().equals("Diesel") ? dieselCostPerLitre : petrolCostPerLitre;
 
                 double gallonsNeeded = distance / mpg;
-                double litresNeeded = gallonsNeeded * 3.78541;
+                double litresNeeded = gallonsNeeded * 4.54609;
                 double tripCost = litresNeeded * fuelPricePerLitre;
 
                 resultLabel.setText(String.format("Trip cost: £%.2f", tripCost));
@@ -71,7 +71,7 @@ public class FuelCostCalculatorGUI extends Application {
                 calculateButton, resultLabel
         );
 
-        Scene scene = new Scene(root, 300, 400);
+        Scene scene = new Scene(root, 1440, 900);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
